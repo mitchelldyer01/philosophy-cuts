@@ -1,0 +1,24 @@
+---
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+
+  markdown-lint:
+    name: Lint Markdown
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@main
+      - name: Lint Markdown
+        uses: actionshub/markdownlint@main
+
+  yaml-lint:
+    name: Lint YAML
+    runs-on: ubuntu-20.04
+    container:
+      image: sdesbure/yamllint:latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Lint YAML
+        run: yamllint .
